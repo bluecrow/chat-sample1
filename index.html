@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8" />
+	<title>Sample Chat ver1.0.3</title>
+</head>
+<body>
+	<div id="container">
+	<h1>Sample Chat ver1.0.3</h1>
+	<div id="inputField">
+		<p>
+			Name: <input type="text" name="name" id="name">
+			Message: <input type="text" name="message" id="message">
+			<input type="button" id="greet" value="送信">
+		</p>
+	</div>
+	<div id="talkField">
+		<div id="result"></div>
+	</div>
+	<div id="ChangeLog">
+		<h2>ChangeLog</h2>
+		<div>
+		ver1.0.0 動いた<br>
+		ver1.0.1 URLのリンク化<br>
+		ver1.0.2 連打対策<br>
+		ver1.0.3 ログ切り捨て
+		</div>
+	</div>
+	</div>
+	<script src="jquery-3.2.1.min.js"></script>
+<script>
+$(function(){
+	$('#greet').click(function(){
+		sendMessage();
+	});
+	$('#message').keypress(function(e){
+		if (e.which == 13) {
+			if($('#message').val()){
+				sendMessage();
+			} else {
+				loadLog();
+				logAll();
+			}
+		}
+	});
+	loadLog();
+	logAll();
+});
+
+var isSending = false;
+// 書き込む
+function sendMessage(){
+	if (isSending) return;
+	$('#message').focus();
+	if(!$('#name').val() || !$('#message').val()) return;
+	isSending = true;
+	$.post('chat.php', {
+		name: $('#name').val(),
+		message: $('#message').val(),
+		mode: "0" // 書き込み
+	}, function(data){
+		$('#result').html(data);
+		$('#message').val('');
+		isSending = false;
+	});
+}
+
+// ログをロードする
+function loadLog(){
+	$.post('chat.php', {
+		mode: "1" // 読み込み
+	}, function(data){
+		$('#result').html(data);
+	});
+}
+
+// 一定間隔でログをリロードする
+function logAll(){
+	setTimeout(function(){
+		loadLog();
+		logAll();
+	},5000); //リロード時間はここで調整
+}
+</script>
+</body>
+</html>
