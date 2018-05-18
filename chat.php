@@ -29,21 +29,8 @@ if($_POST['mode'] === "0"){
 	}
 	$inputValue = date("Y/m/d H:i:s") . "\t" . $name . "\t" . $message . "\n";
 	//ファイルにデータを書き込み
-	if($inputValue){
-		//ファイルをオープンできたか
-		if(!$fp = fopen($log_file, "a")){
-			echo "could not open";
-			exit;
-		}
-		//書き込みできたか
-		if(fwrite($fp, $inputValue) === false) {
-			echo "could not write";
-			exit;
-		}
-		//終了処理
-		fclose($fp);
-	} else {
-		echo "not writable";
+	if (file_put_contents($log_file, $inputValue, FILE_APPEND | LOCK_EX) === false) {
+		echo "could not write";
 		exit;
 	}
 }
