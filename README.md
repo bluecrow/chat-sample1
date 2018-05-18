@@ -1,4 +1,4 @@
-# Sample Chat ver1.0.4
+# Sample Chat ver1.0.5
 
 ## 特長
 
@@ -6,7 +6,7 @@
 
 ## 使い方 Usage
 
-FTPソフト等を使い、WEBサーバの任意のフォルダに置く
+FTPソフト等を使い、WEBサーバの任意のフォルダに置くだけ
 
 ## 変更履歴 ChangeLog
 
