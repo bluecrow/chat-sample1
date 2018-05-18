@@ -2,11 +2,11 @@
 <html lang="ja">
 <head>
 	<meta charset="utf-8" />
-	<title>Sample Chat ver1.0.3</title>
+	<title>Sample Chat ver1.0.4</title>
 </head>
 <body>
 	<div id="container">
-	<h1>Sample Chat ver1.0.3</h1>
+	<h1>Sample Chat ver1.0.4</h1>
 	<div id="inputField">
 		<p>
 			Name: <input type="text" name="name" id="name">
@@ -23,18 +23,29 @@
 		ver1.0.0 動いた<br>
 		ver1.0.1 URLのリンク化<br>
 		ver1.0.2 連打対策<br>
-		ver1.0.3 ログ切り捨て
+		ver1.0.3 ログ切り捨て<br>
+		ver1.0.4 何もしないとリロード間隔が伸びていく
 		</div>
 	</div>
 	</div>
 	<script src="jquery-3.2.1.min.js"></script>
 <script>
+var reloadInterval = 5000;
+var isSending = false;
+
 $(function(){
 	$('#greet').click(function(){
-		sendMessage();
+		reloadInterval = 5000;
+		if($('#message').val()){
+			sendMessage();
+		} else {
+			loadLog();
+			logAll();
+		}
 	});
 	$('#message').keypress(function(e){
 		if (e.which == 13) {
+			reloadInterval = 5000;
 			if($('#message').val()){
 				sendMessage();
 			} else {
@@ -47,7 +58,6 @@ $(function(){
 	logAll();
 });
 
-var isSending = false;
 // 書き込む
 function sendMessage(){
 	if (isSending) return;
@@ -78,8 +88,9 @@ function loadLog(){
 function logAll(){
 	setTimeout(function(){
 		loadLog();
+		reloadInterval += 500;
 		logAll();
-	},5000); //リロード時間はここで調整
+	},reloadInterval); //リロード時間はここで調整
 }
 </script>
 </body>
