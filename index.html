@@ -12,7 +12,6 @@
 			名前: <input type="text" name="name" id="name">
 			メッセージ: <input type="text" name="message" id="message">
 			<input type="button" id="greet" value="送信">
-			再読み込み <span id="reload"></span>
 		</p>
 	</div>
 	<div id="talkField">
@@ -33,13 +32,11 @@
 	</div>
 	<script src="jquery-3.2.1.min.js"></script>
 <script>
-var reloadInterval = 5000;
 var isSending = false;
 var timer;
 
 $(function(){
 	$('#greet').click(function(){
-		reloadInterval = 5000;
 		if($('#message').val()){
 			sendMessage();
 		} else {
@@ -49,7 +46,6 @@ $(function(){
 	});
 	$('#message').keypress(function(e){
 		if (e.which == 13) {
-			reloadInterval = 5000;
 			if($('#message').val()){
 				sendMessage();
 			} else {
@@ -85,8 +81,6 @@ function loadLog(){
 		mode: "1" // 読み込み
 	}, function(data){
 		$('#result').html(data);
-		$('#reload').text(reloadInterval/1000 + '秒後');
-		reloadInterval += 500;
 	});
 }
 
@@ -96,7 +90,7 @@ function logAll(){
 	timer = setTimeout(function(){
 		loadLog();
 		logAll();
-	},reloadInterval); //リロード時間はここで調整
+	},5000); //リロード時間はここで調整
 }
 </script>
 </body>
