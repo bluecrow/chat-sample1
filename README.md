@@ -8,6 +8,10 @@
 
 FTPソフト等を使い、WEBサーバの任意のフォルダに置くだけ
 
+## サンプル Sample
+
+http://www.arkhamsoft.jp/game/chat-sample1/
+
 ## 変更履歴 ChangeLog
 
 - ver1.0.0 動いた
