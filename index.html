@@ -55,15 +55,7 @@ $(function(){
 			}
 		}
 	});
-	$('#message').on('keydown', function(e) {
-		var len = $('#message').val().length;
-		$('#moji').text(len > 0 ? len + '文字' : '');
-	});
-	$('#message').on('keyup', function(e) {
-		var len = $('#message').val().length;
-		$('#moji').text(len > 0 ? len + '文字' : '');
-	});
-	$('#message').on('keypress', function(e) {
+	$('#message').on('change keyup paste', function(e) {
 		var len = $('#message').val().length;
 		$('#moji').text(len > 0 ? len + '文字' : '');
 	});
