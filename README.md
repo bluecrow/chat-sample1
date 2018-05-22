@@ -1,4 +1,4 @@
-# Sample Chat ver1.0.6
+# Sample Chat ver1.0.7
 
 ## 特長
 
@@ -21,3 +21,4 @@ http://www.arkhamsoft.jp/game/chat-sample1/
 - ver1.0.4 何もしないとリロード間隔が伸びていく
 - ver1.0.5 書き込み処理を単純化
 - ver1.0.6 リロード間隔のバグを修正
+- ver1.0.7 行間、折り返し、最大文字数
