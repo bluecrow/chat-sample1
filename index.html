@@ -2,20 +2,20 @@
 <html lang="ja">
 <head>
 	<meta charset="utf-8" />
-	<title>Sample Chat ver1.0.6</title>
+	<title>Sample Chat ver1.0.7</title>
 </head>
 <body>
 	<div id="container">
-	<h1>Sample Chat ver1.0.6</h1>
+	<h1>Sample Chat ver1.0.7</h1>
 	<div id="inputField">
 		<p>
-			名前: <input type="text" name="name" id="name">
-			メッセージ: <input type="text" name="message" id="message">
-			<input type="button" id="greet" value="送信">
+			名前: <input type="text" name="name" id="name" maxlength="40">
+			メッセージ: <input type="text" name="message" id="message" maxlength="140">
+			<input type="button" id="greet" value="送信"><span id="moji"></span>
 		</p>
 	</div>
-	<div id="talkField">
-		<div style="font-size:normal;" id="result"></div>
+	<div id="talkField" style="word-break: break-all; line-height: 140%; font-size: normal;">
+		<div id="result"></div>
 	</div>
 	<div id="changeLog">
 		<h2>変更履歴 ChangeLog</h2>
@@ -26,7 +26,8 @@
 		ver1.0.3 ログ切り捨て<br>
 		ver1.0.4 何もしないとリロード間隔が伸びていく<br>
 		ver1.0.5 書き込み処理を単純化<br>
-		ver1.0.6 リロード間隔のバグを修正
+		ver1.0.6 リロード間隔のバグを修正<br>
+		ver1.0.7 行間、折り返し、最大文字数
 		</div>
 	</div>
 	</div>
@@ -53,6 +54,18 @@ $(function(){
 				logAll();
 			}
 		}
+	});
+	$('#message').on('keydown', function(e) {
+		var len = $('#message').val().length;
+		$('#moji').text(len > 0 ? len + '文字' : '');
+	});
+	$('#message').on('keyup', function(e) {
+		var len = $('#message').val().length;
+		$('#moji').text(len > 0 ? len + '文字' : '');
+	});
+	$('#message').on('keypress', function(e) {
+		var len = $('#message').val().length;
+		$('#moji').text(len > 0 ? len + '文字' : '');
 	});
 	loadLog();
 	logAll();
