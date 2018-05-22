@@ -76,6 +76,7 @@ function sendMessage(){
 	}, function(data){
 		$('#result').html(data);
 		$('#message').val('');
+		$('#moji').text('');
 		isSending = false;
 	});
 }
